@@ -29,9 +29,18 @@ resource "aws_iam_role_policy_attachment" "lambda-kinesis-attach" {
 }
 
 resource "aws_lambda_function" "process-kinesis" {
-  function_name = "ProcessKinesisRecords"
-  handler       = "index.handler"
+  function_name = "lambda_handler"
+  handler       = "parse_event.lambda_handler"
   role          = aws_iam_role.lambda-kinesis-role.arn
-  runtime       = "nodejs12.x"
-  filename      = "index.js.zip"
+  runtime       = "python3.9"
+  filename      = "parse_event.py.zip"
+}
+
+resource "aws_lambda_invocation" "invoke_kinesis_lambda" {
+  function_name = aws_lambda_function.process-kinesis.function_name
+  input         = file("input.txt")
+}
+
+output "invocation_result" {
+  value = jsondecode(aws_lambda_invocation.invoke_kinesis_lambda.result)
 }

@@ -7,5 +7,5 @@ terraform {
 }
 
 provider "aws" {
-  profile = "acg-playground"
+  profile = "default"
 }
