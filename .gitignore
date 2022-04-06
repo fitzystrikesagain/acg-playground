@@ -2,7 +2,7 @@
 **/.terraform/*
 
 # Terraform lockfile
-.terraform.lock.hcl
+environments/ec2/.terraform.lock.hcl
 
 # .tfstate files
 *.tfstate
