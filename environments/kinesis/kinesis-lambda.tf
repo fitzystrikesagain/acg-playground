@@ -46,7 +46,9 @@ resource "aws_kinesis_stream" "lambda_stream" {
   shard_count = 1
 }
 
-//resource "aws_lambda_event_source_mapping" "lambda_event_mapping" {
-//  event_source_arn = aws_kinesis_stream.lambda_stream.arn
-//  function_name    = aws_lambda_function.process_kinesis.function_name
-//}
+resource "aws_lambda_event_source_mapping" "lambda_event_mapping" {
+  batch_size = 100
+  event_source_arn = aws_kinesis_stream.lambda_stream.arn
+  function_name = aws_lambda_function.process_kinesis.function_name
+  starting_position = "LATEST"
+}
