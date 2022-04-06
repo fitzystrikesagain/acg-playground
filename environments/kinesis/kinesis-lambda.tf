@@ -33,5 +33,5 @@ resource "aws_lambda_function" "process-kinesis" {
   handler       = "index.handler"
   role          = aws_iam_role.lambda-kinesis-role.arn
   runtime       = "nodejs12.x"
-  filename      = "index.js"
+  filename      = "index.js.zip"
 }
