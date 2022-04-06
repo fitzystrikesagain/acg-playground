@@ -1,7 +1,7 @@
 import base64
 import json
 
-def lambda_handler(event, context):
+def parse_event(event, context):
     # print("Received event: " + json.dumps(event, indent=2))
     records = event.get("Records")
     # print(records)
